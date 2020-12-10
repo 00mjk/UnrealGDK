@@ -17,12 +17,12 @@ class CrossServerRPCHandler
 public:
 	CrossServerRPCHandler(ViewCoordinator& Coordinator, TUniquePtr<RPCExecutorInterface> RPCExecutor);
 
-	void ProcessOps(const TArray<Worker_Op>& WorkerMessages);
+	void ProcessMessages(const TArray<Worker_Op>& WorkerMessages);
 	void ProcessPendingCrossServerRPCs();
 	const TMap<Worker_EntityId_Key, TArray<FCrossServerRPCParams>>& GetQueuedCrossServerRPCs() const;
 
 private:
-	ViewCoordinator& Coordinator;
+	ViewCoordinator* Coordinator;
 	TUniquePtr<RPCExecutorInterface> RPCExecutor;
 	TSet<uint32> RPCGuidsInFlight;
 	TArray<TTuple<FDateTime, uint32>> RPCsToDelete;

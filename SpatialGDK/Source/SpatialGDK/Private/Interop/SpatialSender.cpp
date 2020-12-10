@@ -600,7 +600,7 @@ RPCPayload USpatialSender::CreateRPCPayloadFromParams(UObject* TargetObject, con
 	return RPCPayload(TargetObjectRef.Offset, RPCInfo.Index, TArray<uint8>(PayloadWriter.GetData(), PayloadWriter.GetNumBytes()),
 					  USpatialLatencyTracer::GetTracer(TargetObject)->RetrievePendingTrace(TargetObject, Function));
 #else
-	return RPCPayload(TargetObjectRef.Offset, RPCInfo.Index, Function->GetUniqueID(),
+	return RPCPayload(TargetObjectRef.Offset, RPCInfo.Index, FMath::RandRange(static_cast<int64>(0), static_cast<int64>(INT64_MAX)),
 					  TArray<uint8>(PayloadWriter.GetData(), PayloadWriter.GetNumBytes()));
 #endif
 }
